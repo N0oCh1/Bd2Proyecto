@@ -1,6 +1,7 @@
 -- prueba
 
 BEGIN
+
 -- cedula, nombre, apellido, correo, telefono, edad (tabla cliente)
     add_cliente(4324543, 'nombre1', 'apellido1', 'ejemplo1@ejemplo.com',65474353 ,12);
     add_cliente(4524543, 'nombre2', 'apellido2', 'ejemplo2@ejemplo.com',65454324 ,22);
@@ -21,6 +22,5 @@ BEGIN
     add_sucursal('PtyComponents Albrook', 'zona gorrila'); -- prueba de error (repetir una insercion)
 
     add_sucursal('PtyComponents Tumba Muerto', 'los libertadores');
-
 END;
 /
