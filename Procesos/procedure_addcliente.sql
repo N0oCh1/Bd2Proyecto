@@ -5,7 +5,6 @@ CREATE SEQUENCE sec_idcliente
   NOCYCLE;
 
 CREATE OR REPLACE PROCEDURE add_cliente(
-    p_idcliente cliente.id_cliente%TYPE,
     p_cedula cliente.cedula%TYPE,
     p_nombre cliente.nombre%TYPE,
     p_apellido cliente.apellido%TYPE,
@@ -53,6 +52,6 @@ BEGIN
     EXCEPTION
         WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
-            RAISE;
+            ROLLBACK;
 END add_cliente;
 /

@@ -1,60 +1,61 @@
-CREATE TABLE CLIENTE (
-    ID_CLIENTE NUMBER NOT NULL,
-    CEDULA NUMBER,
-    NOMBRE VARCHAR(20) NOT NULL,
-    APELLIDO VARCHAR(20) NOT NULL,
-    CORREO VARCHAR(30) NOT NULL,
-    TELEFONO NUMBER,
-    EDAD NUMBER,
-    PRIMARY KEY (ID_CLIENTE)
+CREATE TABLE cliente (
+    id_cliente          NUMBER NOT NULL,
+    cedula              NUMBER,
+    nombre              VARCHAR(20) NOT NULL,
+    apellido            VARCHAR(20) NOT NULL,
+    correo              VARCHAR(30) NOT NULL,
+    telefono            NUMBER,
+    edad                NUMBER,
+    PRIMARY KEY (id_cliente)
 );
 
-CREATE TABLE SUCULAR(
-    ID_SUCURSAL NUMBER NOT NULL,
-    NOMBRE_SUCURSAL VARCHAR(20),
-    UBICACION VARCHAR(25),
-    PRIMARY KEY(ID_SUCURSAL)
+CREATE TABLE sucursal(
+ id_sucursal            NUMBER NOT NULL,
+ nombre_sucursal        VARCHAR(20),
+ ubicacion              VARCHAR(25),
+ PRIMARY KEY(id_sucursal)
 );
 
-CREATE TABLE CATEGORIA_ITEM(
-    ID_CATEGORIA NUMBER NOT NULL,
-    CATEGORIA VARCHAR(20),
-    PRIMARY KEY(ID_CATEGORIA)
+CREATE TABLE categoria_item(
+ id_categoria            NUMBER NOT NULL,
+ Categoria               VARCHAR(20),
+ PRIMARY KEY(id_categoria)
 );
 
-CREATE TABLE PEDIDOS (
-    ID_PEDIDO NUMBER NOT NULL,
-    ID_CLIENTE NUMBER NOT NULL,
-    ID_SUCURSAL NUMBER NOT NULL,
-    FECHA_CREACION TIMESTAMP MONTO NUMBER DEFAULT 0,
-    ITMS NUMBER DEFAULT 0,
-    SUBTOTAL NUMBER DEFAULT 0,
-    PRIMARY KEY (ID_PEDIDO),
-    FOREIGN KEY (ID_CLIENTE) REFERENCES CLIENTE(ID_CLIENTE),
-    FOREIGN KEY (ID_SUCURSAL) REFERENCES SUCURSAL(ID_SUCURSAL)
+CREATE TABLE inventario (
+    id_item                 NUMBER NOT NULL,
+    id_sucursal             NUMBER  NOT null,
+    nombre_item             VARCHAR(20) NOT NULL,
+    descripcion_item        VARCHAR(50),
+    id_categoria            NUMBER NOT NULL,
+    marca                   VARCHAR (10),
+    cantidad                NUMBER,
+    disponibilidad          VARCHAR(10) DEFAULT 'N',
+    precio                  NUMBER DEFAULT 0,
+    PRIMARY KEY (id_item),
+    FOREIGN KEY (id_sucursal) REFERENCES sucursal(id_sucursal),
+    FOREIGN KEY (id_categoria) REFERENCES categoria_item(id_categoria)
 );
 
-CREATE TABLE ARTICULOS (
-    ID_ARTICULO NUMBER NOT NULL,
-    ID_PEDIDO NUMBER NOT NULL,
-    ID_ITEM NUMBER NOT NULL,
-    NOMBRE_ITEM VARCHAR(20) NOT NULL,
-    PRIMARY KEY (ID_CLIENTE),
-    FOREIGN KEY (ID_PEDIDO) REFERENCES PEDIDOS (ID_PEDIDO),
-    FOREIGN KEY (ID_ITEM) REFERENCES INVETARIO (ID_ITEM)
+CREATE TABLE articulos (
+    id_articulo         NUMBER NOT NULL,
+    id_pedido           NUMBER NOT NULL,
+    id_item             NUMBER NOT NULL,
+    nombre_item         VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id_articulo),
+     FOREIGN KEY (id_pedido) REFERENCES pedidos (id_pedido),
+    FOREIGN KEY (id_item) REFERENCES inventario (id_item)
 );
 
-CREATE TABLE INVENTARIO (
-    ID_ITEM NUMBER NOT NULL,
-    ID_SUCURSAL NUMBER NOT NULL,
-    NOMBRE_ITEM VARCHAR(20) NOT NULL,
-    DESCRIPCION_ITEM VARCHAR(50),
-    ID_CATEGORIA NUMBER NOT NULL,
-    MARCA VARCHAR (10),
-    CANTIDAD NUMBER,
-    DISPONIBILIDAD VARCHAR(10) DEFAULT 'no-disponible',
-    PRECIO NUMBER DEFAULT 0,
-    PRIMARY KEY (ID_ITEM),
-    FOREIGN KEY (ID_SUCURSAL) REFERENCES SUCURSAL(ID_SUCURSAL),
-    FOREIGN KEY (ID_CATEGORIA) REFERENCES CATEGORIA(ID_CATEGORIA)
+CREATE TABLE pedidos (
+    id_pedido           NUMBER NOT NULL,
+    id_cliente          NUMBER NOT NULL,
+    id_sucursal         NUMBER NOT NULL,
+    fecha_creacion      TIMESTAMP,
+    monto               NUMBER DEFAULT 0,
+    itms                NUMBER DEFAULT 0,
+    subtotal            NUMBER DEFAULT 0,
+    PRIMARY KEY (id_pedido),
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    FOREIGN KEY (id_sucursal) REFERENCES sucursal(id_sucursal)
 );
