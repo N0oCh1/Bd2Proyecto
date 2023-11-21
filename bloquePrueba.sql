@@ -37,3 +37,5 @@ BEGIN
     add_categoria('s');
 END;
 /
+
+-- id_pedido, id_item, nombre_item (tabla articulos)
