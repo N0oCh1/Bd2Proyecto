@@ -24,3 +24,16 @@ BEGIN
     add_sucursal('PtyComponents Tumba Muerto', 'los libertadores');
 END;
 /
+-- categoria (tabla categoria_item)
+BEGIN
+    add_categoria('Monitores');
+    add_categoria('Perofericos');
+    add_categoria('CPU');
+    add_categoria('Targetas graficas');
+    add_categoria('laptop');
+    add_categoria('Cable');
+    add_categoria('Caja');
+    add_categoria('Cable');
+    add_categoria('s');
+END;
+/
