@@ -1,3 +1,5 @@
+DROP SEQUENCE sec_idcliente;
+
 CREATE SEQUENCE sec_idcliente
   START WITH 1
   INCREMENT BY 1
@@ -16,6 +18,7 @@ IS
     v_count_cedula NUMBER;
     v_count_telefono NUMBER;
     v_count_correo NUMBER;
+    v_id_sq         cliente.id_cliente%type;
 BEGIN
     SELECT COUNT(*)
     INTO v_count_cedula
@@ -34,19 +37,20 @@ BEGIN
 
     -- If cedula, telefono, and correo do not exist, insert the new record
     IF v_count_cedula = 0 AND v_count_telefono = 0 AND v_count_correo = 0 THEN
+        SELECT sec_idcliente.nextval INTO v_id_sq FROM DUAL;
         INSERT INTO cliente (
             id_cliente, cedula, nombre, apellido, correo, telefono, edad
         ) VALUES (
-            sec_idcliente.nextval, p_cedula, p_nombre, p_apellido, p_correo, p_telefono, p_edad
+            v_id_sq, p_cedula, p_nombre, p_apellido, p_correo, p_telefono, p_edad
         );
         COMMIT; 
-        DBMS_OUTPUT.PUT_LINE('Record inserted successfully.');
+        DBMS_OUTPUT.PUT_LINE('el cliente se inserto correctamente');
     ELSIF v_count_cedula > 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Cedula already exists in the cliente table. Record not inserted.');
+        DBMS_OUTPUT.PUT_LINE('Cedula ya existe en los registro');
     ELSIF v_count_telefono > 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Telefono already exists in the cliente table. Record not inserted.');
+        DBMS_OUTPUT.PUT_LINE('Telefono ya existe en los registro');
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Correo already exists in the cliente table. Record not inserted.');
+        DBMS_OUTPUT.PUT_LINE('Correo ya existe en los registro');
     END IF;
 
     EXCEPTION
