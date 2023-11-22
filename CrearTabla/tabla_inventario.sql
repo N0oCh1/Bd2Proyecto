@@ -11,5 +11,5 @@ CREATE TABLE inventario (
 
     PRIMARY KEY (id_item),
     FOREIGN KEY (id_sucursal) REFERENCES sucursal(id_sucursal),
-    FOREIGN KEY (id_categoria) REFERENCES categoria(id_categoria)
+    FOREIGN KEY (id_categoria) REFERENCES categoria_item(id_categoria)
 );
