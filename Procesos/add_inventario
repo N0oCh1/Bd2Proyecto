@@ -1,0 +1,46 @@
+drop procedure add_inventario;
+CREATE OR REPLACE PROCEDURE add_inventario(
+    p_iditem inventario.id_item%TYPE,    
+    p_idsucursal inventario.id_sucursal%TYPE,
+    p_nombreitem inventario.nombre_item%TYPE,
+    p_descripcon inventario.descripcion_item%TYPE,
+    p_categoria inventario.id_categoria%TYPE,
+    p_marca inventario.marca%TYPE,
+    p_cantidad inventario.cantidad%TYPE,
+    p_diponibilidad inventario.disponibilidad%TYPE,
+    p_precio inventario.precio%TYPE
+)
+IS
+    v_count_idsucursal NUMBER;
+    v_count_nombreitem NUMBER;
+BEGIN
+    SELECT COUNT(*)
+    INTO v_count_idsucursal
+    FROM inventario
+    WHERE id_sucursal = p_idsucursal;
+
+    SELECT COUNT(*)
+    INTO v_count_nombreitem
+    FROM inventario
+    WHERE nombre_item = p_nombreitem;
+
+    IF v_count_idsucursal = 0 OR v_count_nombreitem = 0 THEN
+        INSERT INTO inventario (
+            id_item, id_sucursal, nombre_item, descripcion_item, id_categoria, marca, cantidad, disponibilidad, precio
+        ) VALUES (
+            p_iditem, p_idsucursal, p_nombreitem, p_descripcon, p_categoria, p_marca, p_cantidad, p_diponibilidad, p_precio
+        );
+        COMMIT; 
+        DBMS_OUTPUT.PUT_LINE('el articulo se inserto correctamente en el inventario');
+    ELSIF v_count_idsucursal > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('En el inventario el articula esta en existencia');
+    ELSIF v_count_nombreitem > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Este articula ya esta registrado');
+    END IF;
+
+    EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+            ROLLBACK;
+END add_inventario;
+/
