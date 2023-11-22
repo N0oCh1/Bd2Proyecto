@@ -33,7 +33,7 @@ BEGIN
     add_categoria('laptop');
     add_categoria('Cable');
     add_categoria('Caja');
-    add_categoria('Cable');
+    add_categoria('Cable'); -- preuba de error duplicacion de categoria(tabla categoria)
     add_categoria('s');
 END;
 /
@@ -49,4 +49,30 @@ BEGIN
 END;
 /
 
--- id_pedido, id_item, nombre_item (tabla articulos)
+-- id_cliente, id_sucursal, estado (tabla pedido)
+BEGIN
+    add_pedido(3, 1005, 'PENDIENTE');
+    add_pedido(5, 1006, 'PENDIENTE');
+END;
+/
+-- id_pedido, id_item, cantidad (tabla articulos)
+BEGIN
+    add_articulo(10005, 2, 1);
+    add_articulo(10005, 3, 1);
+    add_articulo(10005, 1, 1);
+    add_articulo(10005, 5, 2);
+
+    add_articulo(10006, 1, 3);
+    add_articulo(10006, 2, 3);
+    add_articulo(10006, 1, 3);
+    add_articulo(10006, 3, 3);
+    
+
+END;
+/
+
+BEGIN
+add_articulo(10006, 3, 3);
+END;
+/
+
