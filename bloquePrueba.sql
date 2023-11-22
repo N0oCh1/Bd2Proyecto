@@ -38,4 +38,15 @@ BEGIN
 END;
 /
 
+BEGIN
+--id_sucursal, nombre_item, descripcion, id_categoria, marca, cantidad, disponibilidad, precio
+    add_inventario(1000, 'intel I7', 'CPU algo', 3, 'Intel', 99, 'S', 499);
+    add_inventario(1000, 'intel I5', 'CPU algo', 3, 'Intel', 99, 'S', 499);
+    add_inventario(1000, 'intel I9', 'CPU algo', 3, 'Intel', 99, 'S', 499);
+    add_inventario(1001, 'hp omen', 'laptop gaming', 3, 'hp', 99, 'S', 499);
+    add_inventario(1002, 'hp omen', 'laptop gaming', 3, 'hp', 99, 'S', 499);
+    add_inventario(1002, 'hp omen', 'laptop gaming', 3, 'hp', 99, 'S', 499); -- prueba de error (duplicacion de item)
+END;
+/
+
 -- id_pedido, id_item, nombre_item (tabla articulos)
