@@ -49,6 +49,8 @@ BEGIN
 END;
 /
 
+-- camienza el negocio 
+
 -- id_cliente, id_sucursal, estado (tabla pedido)
 BEGIN
     add_pedido(3, 1005, 'PENDIENTE');
@@ -61,7 +63,6 @@ BEGIN
     add_articulo(10005, 3, 1);
     add_articulo(10005, 1, 1);
     add_articulo(10005, 5, 2);
-
     add_articulo(10006, 1, 3);
     add_articulo(10006, 2, 3);
     add_articulo(10006, 1, 3);
@@ -71,8 +72,4 @@ BEGIN
 END;
 /
 
-BEGIN
-add_articulo(10006, 3, 3);
-END;
-/
 
