@@ -47,6 +47,8 @@ CREATE TABLE articulos (
     FOREIGN KEY (id_pedido) REFERENCES pedidos (id_pedido),
     FOREIGN KEY (id_item) REFERENCES inventario (id_item)
 );
+ALTER TABLE articulos
+ADD precio NUMBER;
 
 CREATE TABLE pedidos (
     id_pedido           NUMBER NOT NULL,
